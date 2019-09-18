@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lab1</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="disc">The tiger is the largest species among the Felidae and classified in the genus Panthera. It is most recognisable for its dark vertical stripes on reddish-orange fur with a lighter underside. It is an apex predator, primarily preying on ungulates such as deer and wild boar.</string>
+    <string name="tiger">tiger</string>
+</resources>
