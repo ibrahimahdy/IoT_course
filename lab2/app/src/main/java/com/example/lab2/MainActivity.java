@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         tmpValue = (EditText)findViewById(R.id.tmpTxt);
         restlt = (TextView)findViewById(R.id.restltTxt);
         textMode = (TextView)findViewById(R.id.modeTxt);
+
+        Log.i("MainActivity", "We are onCreate!");
 
     }
 
@@ -60,11 +63,33 @@ public class MainActivity extends AppCompatActivity {
             restlt.setText("Result: " + val);
         }
 
-
-
-
-
     }
 
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("OnPauseActivity", "We are onPause!");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("onResumeActivity", "We are onResume!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("onStopActivity", "We are onStop!");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("onDestroyeActivity", "We are onDestroy!");
+    }
 
 }
