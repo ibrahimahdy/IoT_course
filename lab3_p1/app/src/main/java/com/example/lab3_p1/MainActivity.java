@@ -1,6 +1,7 @@
 package com.example.lab3_p1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,13 +40,42 @@ public class MainActivity extends AppCompatActivity {
         this.setContentView(theList);
 
     }
-
+    static final int GO_TO_DETAILS = 1;
+    static final int RATING = 1;
 
     public void openDetailsActivity(String title, int index){
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("theTitle", title);
         intent.putExtra("theIndex", index);
-        startActivity(intent);
+        startActivityForResult(intent, GO_TO_DETAILS);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == GO_TO_DETAILS) {
+            if (resultCode == RATING) {
+
+                int score = (int)data.getExtras().getFloat("theRating");
+                int indexValue = data.getExtras().getInt("theIndex");
+
+                // find resource id by using its name
+                Log.i("scoreValue", ""+score);
+                Log.i("indexValue", ""+indexValue);
+
+                int color_id = getResources().getIdentifier("color_rating_" + score, "color", getPackageName());
+                Log.i("color_id", ""+color_id);
+
+                int color = ContextCompat.getColor(this, color_id);
+
+
+                Button button = (Button)theList.getChildAt(indexValue);
+                button.setBackgroundColor(color);
+            }
+        }
+    }
+
+
 
 }

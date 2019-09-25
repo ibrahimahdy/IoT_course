@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">lab3_p1</string>
+    <string name="textview1">TextView</string>
+    <string name="textview2">TextView</string>
+    <string name="button">Save</string>
     <string-array name="recipe_titles">
         <item>Cinnamon Bread</item>
         <item>Million-Dollar Spaghetti</item>

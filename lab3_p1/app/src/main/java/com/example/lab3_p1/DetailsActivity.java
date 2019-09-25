@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -12,6 +14,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView title;
     TextView description;
 
+    int indexValue;
 
 
     @Override
@@ -26,9 +29,34 @@ public class DetailsActivity extends AppCompatActivity {
             title = (TextView)findViewById(R.id.titleView);
             title.setText(extras.getString("theTitle"));
 
+            indexValue = extras.getInt("theIndex");
             description = (TextView)findViewById(R.id.descView);
-            description.setText(descValues[extras.getInt("theindex")]);
+            description.setText(descValues[indexValue]);
+
         }
+
+    }
+
+
+    public final int RATING = 1;
+
+    public void saveRating(View v){
+
+        RatingBar mBar = (RatingBar) findViewById(R.id.myRating);
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("theRating", mBar.getRating());
+
+        Log.i("theRating", ""+mBar.getRating());
+
+        resultIntent.putExtra("theIndex", indexValue);
+
+        Log.i("theIndex", ""+indexValue);
+
+
+        setResult(RATING, resultIntent);
+        finish();
+
 
     }
 }
