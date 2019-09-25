@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailsFragment">
+
+    <LinearLayout
+        android:id="@+id/details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="176dp"
+            android:gravity="center_horizontal"
+            android:text="@string/titleView" />
+
+        <TextView
+            android:id="@+id/discView"
+            android:layout_width="match_parent"
+            android:layout_height="367dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="176dp"
+            android:gravity="center"
+            android:text="@string/descView" />
+
+        <Button
+            android:id="@+id/closebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/close" />
+    </LinearLayout>
+
+
+</FrameLayout>

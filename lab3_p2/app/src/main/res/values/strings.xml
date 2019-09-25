@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">lab3_p2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleView">titleView</string>
+    <string name="descView">descView</string>
+    <string name="close">Close</string>
+    <string-array name="recipe_titles">
+        <item>Cinnamon Bread</item>
+        <item>Million-Dollar Spaghetti</item>
+        <item>Simple Macaroni and Cheese</item>
+        <item>Stuffed Eggplant Parmesan Rolls</item>
+    </string-array>
+
+    <string-array name="recipe_values">
+        <item>
+            Preheat oven to 350 degrees F (175 degrees C). Grease one 9x5 inch loaf pan.
+
+            Measure flour, 1 cup sugar, baking powder, baking soda, 1 1/2 teaspoons cinnamon, salt, buttermilk, oil, eggs and vanilla into large mixing bowl. Beat 3 minutes. Pour into prepared loaf pan. Smooth top.
+
+            Combine 2 tablespoons white sugar, 1 teaspoon cinnamon and butter, mixing until crumbly. Sprinkle topping over smoothed batter. Using knife, cut in a light swirling motion to give a marbled effect.
+
+            Bake for about 50 minutes. Test with toothpick. When inserted it should come out clean. Remove bread from pan to rack to cool.
+        </item>
+        <item>
+            Preheat oven to 350 degrees F (175 degrees C).
+
+            Bring a large pot of lightly salted water to a boil. Cook spaghetti in the boiling water, stirring occasionally until cooked through but firm to the bite, about 12 minutes. Drain.
+
+            Heat a large skillet over medium-high heat. Cook and stir beef in the hot skillet until browned and crumbly, 5 to 7 minutes; drain and discard grease. Transfer to a bowl and mix spaghetti sauce into ground beef.
+
+            Place half the slices of butter into the bottom of a 9x13-inch casserole dish. Spread half the spaghetti into the dish. Mix cottage cheese, cream cheese, and sour cream together in a bowl; spread mixture over spaghetti. Layer remaining spaghetti over creamy mixture. Top with remaining pats of butter.
+
+            Pour ground beef mixture over spaghetti and spread to cover casserole.
+
+            Bake in the preheated oven for 30 minutes. Spread Cheddar cheese over casserole and continue baking until cheese has melted and is lightly browned, about 15 more minutes.
+        </item>
+
+
+        <item>
+            Bring a large pot of lightly salted water to a boil. Cook elbow macaroni in the boiling water, stirring occasionally until cooked through but firm to the bite, 8 minutes. Drain.
+
+            Melt butter in a saucepan over medium heat; stir in flour, salt, and pepper until smooth, about 5 minutes. Slowly pour milk into butter-flour mixture while continuously stirring until mixture is smooth and bubbling, about 5 minutes. Add Cheddar cheese to milk mixture and stir until cheese is melted, 2 to 4 minutes.
+
+            Fold macaroni into cheese sauce until coated.
+        </item>
+
+
+        <item>
+            Preheat oven to 400 degrees F (200 degrees C). Grease a 9x13-inch baking dish with butter.
+
+            Slice eggplant into 1/4-inch thick slices lengthwise; discard the end slices with skin.Lay the eggplant slices on paper towels and sprinkle both sides generously with sea salt. Let slices drain for 30 minutes; rinse and pat dry with paper towels.
+
+            Place flour, eggs, and bread crumbs in separate shallow bowls. Dip each eggplant slice in flour and shake off excess; dip into egg and then into bread crumbs.
+
+            Heat vegetable oil in a large skillet over medium heat and fry the slices until golden brown, about 5 minutes per side. Drain on paper towels, place on baking sheets, and refrigerate eggplant for 10 minutes.
+
+            Mix ricotta cheese, Romano cheese, and garlic in a bowl; season to taste with salt and black pepper. Place a cooled eggplant slice onto a work surface and mound 1/3 to 1/2 cup of cheese mixture in the center; roll up slice and place seam side down into the prepared baking sheet. Repeat with remaining slices and cheese filling.
+
+            Bake rolls in the preheated oven until filling is hot, about 25 minutes.
+        </item>
+    </string-array>
+</resources>

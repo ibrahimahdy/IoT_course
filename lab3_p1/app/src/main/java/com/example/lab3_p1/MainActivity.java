@@ -8,11 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout theList;
-;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,26 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == GO_TO_DETAILS) {
             if (resultCode == RATING) {
-
                 int score = (int)data.getExtras().getFloat("theRating");
                 int indexValue = data.getExtras().getInt("theIndex");
-
-                // find resource id by using its name
-                Log.i("scoreValue", ""+score);
-                Log.i("indexValue", ""+indexValue);
-
-                int color_id = getResources().getIdentifier("color_rating_" + score, "color", getPackageName());
-                Log.i("color_id", ""+color_id);
-
-                int color = ContextCompat.getColor(this, color_id);
-
-
-                Button button = (Button)theList.getChildAt(indexValue);
-                button.setBackgroundColor(color);
+                if(score !=0){
+                    int color_id = getResources().getIdentifier("color_rating_" + score, "color", getPackageName());
+                    int color = ContextCompat.getColor(this, color_id);
+                    Button button = (Button)theList.getChildAt(indexValue);
+                    button.setBackgroundColor(color);
+                }
             }
         }
     }
-
-
-
 }

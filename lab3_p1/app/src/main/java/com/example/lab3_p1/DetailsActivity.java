@@ -43,20 +43,10 @@ public class DetailsActivity extends AppCompatActivity {
     public void saveRating(View v){
 
         RatingBar mBar = (RatingBar) findViewById(R.id.myRating);
-
         Intent resultIntent = new Intent();
         resultIntent.putExtra("theRating", mBar.getRating());
-
-        Log.i("theRating", ""+mBar.getRating());
-
         resultIntent.putExtra("theIndex", indexValue);
-
-        Log.i("theIndex", ""+indexValue);
-
-
         setResult(RATING, resultIntent);
         finish();
-
-
     }
 }
