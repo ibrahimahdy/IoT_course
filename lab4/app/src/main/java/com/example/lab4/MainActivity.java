@@ -3,15 +3,23 @@ package com.example.lab4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final BroadcastReceiver myReceiver = new CallReceiver();
+    private static MainActivity instance = new MainActivity();
+
+    private final BroadcastReceiver myReceiver = new CallReceiver(instance);
+    private ArrayList<String> phoneNumberList = new ArrayList<String>();
+    private static ArrayAdapter<String> adapter;
+    ListView numbers_listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         this.registerReceiver(myReceiver, filter);
 
+        phoneNumberList.add("hi");
+        phoneNumberList.add("hi");
+        phoneNumberList.add("hi");
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phoneNumberList);
+        numbers_listview = (ListView)findViewById(R.id.numbers_listview);
+        numbers_listview.setAdapter(adapter);
 
     }
 
@@ -31,4 +45,9 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(myReceiver);
     }
 
+
+    public void addPhoneNumberToList(String phoneNumber){
+        phoneNumberList.add("hi");
+        adapter.notifyDataSetChanged();
+    }
 }
