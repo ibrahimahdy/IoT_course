@@ -7,10 +7,11 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +32,13 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter filter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         this.registerReceiver(myReceiver, filter);
         phoneNumberList.add("Your phone log!");
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phoneNumberList);
+
+      //  adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phoneNumberList);
         numbers_listview = (ListView)findViewById(R.id.numbers_listview);
-        numbers_listview.setAdapter(adapter);
+      //  numbers_listview.setAdapter(adapter);
+
+        numbers_listview.setAdapter(new CustomAdapter(phoneNumberList));
+
     }
 
     @Override
@@ -49,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         phoneNumberList.add(phoneNumber);
 
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+        numbers_listview.setAdapter(new CustomAdapter(phoneNumberList));
     }
 }
