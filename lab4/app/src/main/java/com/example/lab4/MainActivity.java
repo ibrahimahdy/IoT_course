@@ -14,9 +14,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static MainActivity instance = new MainActivity();
+    private static MainActivity instance;
 
-    private final BroadcastReceiver myReceiver = new CallReceiver(instance);
+    private final BroadcastReceiver myReceiver = new CallReceiver();
     private ArrayList<String> phoneNumberList = new ArrayList<String>();
     private static ArrayAdapter<String> adapter;
     ListView numbers_listview;
@@ -25,18 +25,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        instance = this;
 
         // register the broadcast
         IntentFilter filter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         this.registerReceiver(myReceiver, filter);
-
-        phoneNumberList.add("hi");
-        phoneNumberList.add("hi");
-        phoneNumberList.add("hi");
+        phoneNumberList.add("Your phone log!");
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, phoneNumberList);
         numbers_listview = (ListView)findViewById(R.id.numbers_listview);
         numbers_listview.setAdapter(adapter);
-
     }
 
     @Override
@@ -45,9 +42,13 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(myReceiver);
     }
 
-
+    public static MainActivity getInstance() {
+        return instance;
+    }
     public void addPhoneNumberToList(String phoneNumber){
-        phoneNumberList.add("hi");
+        phoneNumberList.add(phoneNumber);
+
+
         adapter.notifyDataSetChanged();
     }
 }

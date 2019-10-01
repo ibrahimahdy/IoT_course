@@ -9,17 +9,6 @@ import android.util.Log;
 
 public class CallReceiver extends BroadcastReceiver {
 
-    MainActivity mainActivity;
-    public CallReceiver(MainActivity mainActivity) {
-        this.mainActivity = mainActivity;
-    }
-    public MainActivity getMainActivity(){
-        return mainActivity;
-    }
-    public void setMainActivity(MainActivity activity) {
-        this.mainActivity = activity;
-    }
-
     private static final String TAG = "MyBroadcastReceiver";
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -36,8 +25,10 @@ public class CallReceiver extends BroadcastReceiver {
             if (intent.hasExtra(TelephonyManager.EXTRA_INCOMING_NUMBER)){
                 String phoneNo = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
                 Log.i(TAG, phoneNo);
-
-                getMainActivity().addPhoneNumberToList(phoneNo);
+                Log.i(TAG, TelephonyManager.EXTRA_STATE_RINGING);
+                if (intent.getStringExtra(TelephonyManager.EXTRA_STATE).equals(TelephonyManager.EXTRA_STATE_RINGING)){
+                    MainActivity.getInstance().addPhoneNumberToList(phoneNo);
+                }
             }
         }
     }
