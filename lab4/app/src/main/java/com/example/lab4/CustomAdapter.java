@@ -1,9 +1,12 @@
 package com.example.lab4;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,14 +36,27 @@ public class CustomAdapter extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        //final int thePos = position;
         View view;
         if (convertView == null) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             view = layoutInflater.inflate(R.layout.custom_list_item, parent, false);
 
             TextView phone;
+            final String theNumber = getItem(position);
             phone = (TextView) view.findViewById(R.id.phoneNumber);
-            phone.setText(getItem(position));
+            phone.setText(theNumber);
+
+            Button call;
+            call = (Button) view.findViewById(R.id.callBtn);
+            call.setText("Call");
+            call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view)
+                {
+                    MainActivity.getInstance().dialPhoneNumber(theNumber);
+                }
+            });
 
         } else{
             view = convertView;
@@ -48,4 +64,6 @@ public class CustomAdapter extends BaseAdapter {
 
         return (view);
     }
+
+
 }
