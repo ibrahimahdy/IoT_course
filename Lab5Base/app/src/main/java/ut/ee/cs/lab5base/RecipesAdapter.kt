@@ -24,10 +24,14 @@ class RecipesAdapter(var model: RecipeViewModel,  var activity: MainActivity) : 
         val recipe = getItem(position)
 
         view.recipeTitleTextview.text = recipe.title
+        view.recipeAuthorTextview.text = recipe.author
+        view.recipePreptimeTextview.text = recipe.prepTime.toString()
+
         // TODO: add other fiels
 
         view.setOnClickListener {
-//            activity.openDetails(recipe.id)
+           activity.openDetails(recipe.id)
+
         }
 
         return view

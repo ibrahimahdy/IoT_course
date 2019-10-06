@@ -2,12 +2,18 @@ package ut.ee.cs.lab5base.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_main.*
+import ut.ee.cs.lab5base.LocalDbClient
 import ut.ee.cs.lab5base.R
 import ut.ee.cs.lab5base.RecipeViewModel
 import ut.ee.cs.lab5base.RecipesAdapter
+import ut.ee.cs.lab5base.room.RecipeEntity
+import ut.ee.cs.lab5base.room.RecipesDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var model: RecipeViewModel
     lateinit var recipesAdapter: RecipesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             startActivity(Intent(this, NewRecipeActivity::class.java))
         }
+
     }
 
 
@@ -39,8 +47,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openDetails(recipeId: Int) {
-        // launch details activity and pass recipe ID
-
         val i = Intent(this, RecipeDetailsActivity::class.java)
         i.putExtra("recipeId", recipeId)
         startActivity(i)
