@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     EditText count;
     GridView myView;
     List<Bitmap> imageList = new ArrayList<>();
-    private static ArrayAdapter<Bitmap> adapter;
 
     private final BroadcastReceiver myReceiver = new BroadcastReceiver() {
         @Override
@@ -33,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
             byte[] byteArray = intent.getByteArrayExtra("result");
             Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             imageList.add(bmp);
-            Log.i("numm", ""+ byteArray.length);
+            myView.setAdapter(new CatAdapter(imageList));
+            Log.i("done", ""+ byteArray.length);
         }
     };
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        myView = (GridView) findViewById(R.id.cat_gridview);
 
         IntentFilter filter = new IntentFilter();
         filter.addAction("downloadedFiles");
@@ -65,6 +66,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DownloadService.class);
         intent.putExtra("imgCount", Integer.parseInt(count.getText().toString()));
         startService(intent);
-    //    myView.setAdapter(new CatAdapter(imageList));
     }
 }

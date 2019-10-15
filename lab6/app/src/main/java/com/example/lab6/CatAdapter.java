@@ -40,9 +40,9 @@ public class CatAdapter extends BaseAdapter {
         if (convertView == null) {
             imageView.setImageBitmap(getItem(position));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setLayoutParams(new AbsListView.LayoutParams(400,400));
+            imageView.setLayoutParams(new AbsListView.LayoutParams(600,600));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(5, 5, 5 ,5);
+            imageView.setPadding(6, 6, 6 ,6);
 
         } else{
             imageView = (ImageView)convertView;
