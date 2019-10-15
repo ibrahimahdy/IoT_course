@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
-import javax.xml.transform.TransformerException;
-
 
 public class DownloadService extends Service {
 
@@ -37,8 +35,6 @@ public class DownloadService extends Service {
 
         @Override
         public void handleMessage(Message msg) {
-            // Normally we would do some work here, like download a file.
-            // For our sample, we just sleep for 5 seconds.
             if(isMulti){
                 Log.i("thread",""+Thread.currentThread().getId());
                 download();
@@ -70,19 +66,6 @@ public class DownloadService extends Service {
             Log.i("service", "NUll download");
         }
     }
-//    @Override
-//    public void onCreate() {
-//        // Start up the thread running the service. Note that we create a
-//        // separate thread because the service normally runs in the process's
-//        // main thread, which we don't want to block. We also make it
-//        // background priority so CPU-intensive work doesn't disrupt our UI.
-//        HandlerThread thread = new HandlerThread("ServiceStartArguments", Process.THREAD_PRIORITY_BACKGROUND);
-//        thread.start();
-//
-//        // Get the HandlerThread's Looper and use it for our Handler
-//        serviceLooper = thread.getLooper();
-//        serviceHandler = new ServiceHandler(serviceLooper);
-//    }
 
 
     @Override
@@ -92,6 +75,7 @@ public class DownloadService extends Service {
 
         int imgCount = intent.getIntExtra("imgCount", -1);
         isMulti = intent.getBooleanExtra("multi", false);
+
         if(isMulti){
             for(int i=0; i<imgCount; i++){
                 createTheread(startId, imgCount);
@@ -105,7 +89,6 @@ public class DownloadService extends Service {
 
 
     private void createTheread(int startId, int imgCount){
-
         // Start up the thread running the service. Note that we create a
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block. We also make it
@@ -125,7 +108,6 @@ public class DownloadService extends Service {
 
         serviceHandler.sendMessage(msg);
     }
-
 
 
     @Override
@@ -177,6 +159,5 @@ public class DownloadService extends Service {
 
         return resizedBitmap;
     }
-
 
 }

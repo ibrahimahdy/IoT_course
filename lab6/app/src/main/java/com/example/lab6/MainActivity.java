@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -69,10 +70,12 @@ public class MainActivity extends AppCompatActivity {
         count = (EditText)findViewById(R.id.images_count);
         multi = (CheckBox) findViewById(R.id.multiCheck);
 
+        if(!TextUtils.isEmpty(count.getText().toString())){
+            Intent intent = new Intent(this, DownloadService.class);
+            intent.putExtra("imgCount", Integer.parseInt(count.getText().toString()));
+            intent.putExtra("multi", multi.isChecked());
+            startService(intent);
+        }
 
-        Intent intent = new Intent(this, DownloadService.class);
-        intent.putExtra("imgCount", Integer.parseInt(count.getText().toString()));
-        intent.putExtra("multi", multi.isChecked());
-        startService(intent);
     }
 }
