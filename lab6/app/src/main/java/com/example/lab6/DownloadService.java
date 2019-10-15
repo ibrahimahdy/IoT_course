@@ -18,14 +18,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.xml.transform.TransformerException;
+
 
 public class DownloadService extends Service {
 
 
     private Looper serviceLooper;
     private ServiceHandler serviceHandler;
+    private static boolean isMulti;
 
     // Handler that receives messages from the thread
     private final class ServiceHandler extends Handler {
@@ -37,31 +39,37 @@ public class DownloadService extends Service {
         public void handleMessage(Message msg) {
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
-            Intent result;
-
-            for (int i=0; i<msg.arg2; i++){
-
-                result =  new Intent();
-                byte[] img = getBitmapFromURL("https://cataas.com/cat?width=400&height=400");
-                if(img.length != 0){
-                    Log.i("service", "downloaded: " + img.length);
-                    result.putExtra("result", img);
-                    result.setAction("downloadedFiles");
-                    sendBroadcast(result);
-                }
-                else{
-                    Log.i("service", "NUll download");
-                }
-
-
+            if(isMulti){
+                Log.i("thread",""+Thread.currentThread().getId());
+                download();
             }
-
+            else{
+                for (int i=0; i<msg.arg2; i++){
+                    download();
+                    Log.i("thread_"+ i,""+Thread.currentThread().getId());
+                }
+            }
             // Stop the service using the startId, so that we don't stop
             // the service in the middle of handling another job
             stopSelf(msg.arg1);
         }
     }
 
+
+    private void download(){
+        Intent result;
+        result =  new Intent();
+        byte[] img = getBitmapFromURL("https://cataas.com/cat?width=400&height=400");
+        if(img.length != 0){
+            Log.i("service", "downloaded: " + img.length);
+            result.putExtra("result", img);
+            result.setAction("downloadedFiles");
+            sendBroadcast(result);
+        }
+        else{
+            Log.i("service", "NUll download");
+        }
+    }
 //    @Override
 //    public void onCreate() {
 //        // Start up the thread running the service. Note that we create a
@@ -76,10 +84,28 @@ public class DownloadService extends Service {
 //        serviceHandler = new ServiceHandler(serviceLooper);
 //    }
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Log.i("service", "service started");
+
+        int imgCount = intent.getIntExtra("imgCount", -1);
+        isMulti = intent.getBooleanExtra("multi", false);
+        if(isMulti){
+            for(int i=0; i<imgCount; i++){
+                createTheread(startId, imgCount);
+            }
+        }else{
+            createTheread(startId, imgCount);
+        }
+        // If we get killed, after returning from here, restart
+        return START_REDELIVER_INTENT;
+    }
+
+
+    private void createTheread(int startId, int imgCount){
+
         // Start up the thread running the service. Note that we create a
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block. We also make it
@@ -95,13 +121,12 @@ public class DownloadService extends Service {
         // start ID so we know which request we're stopping when we finish the job
         Message msg = serviceHandler.obtainMessage();
         msg.arg1 = startId;
-        msg.arg2 = intent.getIntExtra("imgCount", -1);
+        msg.arg2 = imgCount;
 
         serviceHandler.sendMessage(msg);
-
-        // If we get killed, after returning from here, restart
-        return START_REDELIVER_INTENT;
     }
+
+
 
     @Override
     public IBinder onBind(Intent intent) {

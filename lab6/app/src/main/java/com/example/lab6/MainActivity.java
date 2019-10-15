@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.GridView;
 
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText count;
     GridView myView;
+    CheckBox multi;
     List<Bitmap> imageList = new ArrayList<>();
 
     private final BroadcastReceiver myReceiver = new BroadcastReceiver() {
@@ -56,15 +59,20 @@ public class MainActivity extends AppCompatActivity {
                 get_cats();
             }
         });
+
+
     }
 
     public void get_cats(){
 
         Log.i("getCats", "button clicked");
         count = (EditText)findViewById(R.id.images_count);
+        multi = (CheckBox) findViewById(R.id.multiCheck);
+
 
         Intent intent = new Intent(this, DownloadService.class);
         intent.putExtra("imgCount", Integer.parseInt(count.getText().toString()));
+        intent.putExtra("multi", multi.isChecked());
         startService(intent);
     }
 }

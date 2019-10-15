@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">lab6</string>
     <string name="get_cats">Get Cats!</string>
+    <string name="multithread">MUltithread</string>
 </resources>
