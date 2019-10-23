@@ -3,21 +3,24 @@ package com.example.contacts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
 
 import android.Manifest;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.ListView;
-import android.provider.ContactsContract;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    HashMap<String, String> myContact;
+    ArrayList<HashMap<String,String>> contactsList = new ArrayList();
+    ListView contacts_listview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,requiredPermissions,  1);
         }
         else{
-            registerReceiver();
+            retrieveContacts();
         }
 
     }
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    registerReceiver();
+                    retrieveContacts();
                 }
                 return;
             }
@@ -51,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void registerReceiver(){
-        //Log.i("permission", "Granted!");
-        // Sets the columns to retrieve for the user profile
+    private void retrieveContacts(){
+
         String projection [] = new String[]
                 {
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -61,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         ContactsContract.CommonDataKinds.Phone.NUMBER
                 };
 
-        // Retrieves the profile from the Contacts Provider
         Cursor profileCursor =
                 getContentResolver().query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -88,10 +89,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 emails.close();
 
-
-                Log.i("Done", "Contact: " + name + " -- " + phoneNumber+ " -- " + emailAddress);
+                myContact = new HashMap<String, String>();
+                myContact.put("name", name);
+                myContact.put("phoneNumber", phoneNumber);
+                myContact.put("emailAddress", emailAddress);
+                contactsList.add(myContact);
 
             }
+
+            contacts_listview = (ListView)findViewById(R.id.contacts_listview);
+
+            contacts_listview.setAdapter(new CustomAdapter(contactsList));
         }
 
     }
