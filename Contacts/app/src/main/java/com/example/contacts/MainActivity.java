@@ -20,13 +20,13 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, String> myContact;
     ArrayList<HashMap<String,String>> contactsList = new ArrayList();
     ListView contacts_listview;
-
+    private static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        instance = this;
 
         String requiredPermissions[] = {Manifest.permission.READ_CONTACTS};
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
-
+    
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -53,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void retrieveContacts(){
-
         String projection [] = new String[]
                 {
+                        ContactsContract.CommonDataKinds.Phone._ID,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                         ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                         ContactsContract.CommonDataKinds.Phone.NUMBER
@@ -71,37 +69,29 @@ public class MainActivity extends AppCompatActivity {
                         null,
                         null);
 
-
-        String name="",phoneNumber="",emailAddress="";
         if(profileCursor != null){
             Log.i("Done", "Rows: " + profileCursor.getCount());
 
-
-            while(profileCursor.moveToNext()){
-                name = profileCursor.getString(profileCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                phoneNumber = profileCursor.getString(profileCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-                String contactId = profileCursor.getString(profileCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID));
-                Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId,null, null);
-                if (emails.moveToFirst())
-                {
-                    emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
-                }
-                emails.close();
-
-                myContact = new HashMap<String, String>();
-                myContact.put("name", name);
-                myContact.put("phoneNumber", phoneNumber);
-                myContact.put("emailAddress", emailAddress);
-                contactsList.add(myContact);
-
-            }
-
             contacts_listview = (ListView)findViewById(R.id.contacts_listview);
-
-            contacts_listview.setAdapter(new CustomAdapter(contactsList));
+            contacts_listview.setAdapter(new ContactsCursorAdapter(this,profileCursor));
         }
 
     }
+
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+    public String getEmail(String contactID) {
+        String emailAddress="";
+        Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactID,null, null);
+        if (emails.moveToFirst())
+        {
+            emailAddress = emails.getString(emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA));
+        }
+        emails.close();
+        return emailAddress;
+    }
+
 
 }
