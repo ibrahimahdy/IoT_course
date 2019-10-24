@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,9 @@ public class ListFragment extends Fragment {
 
     LinearLayout theList;
     ListView contacts_listview;
+    SearchView editsearch;
+    CursorAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,16 +46,40 @@ public class ListFragment extends Fragment {
         theList = theView.findViewById(R.id.list_linearlayout);
         contacts_listview = theView.findViewById(R.id.contacts_listview);
 
+
         instance = MainActivity.getInstance();
-        retrieveContacts();
+        setAdapter(retrieveContacts());
+
+
+        editsearch = (SearchView) theView.findViewById(R.id.search);
+//        editsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+////                adapter.getFilter().filter(query);
+////                adapter.notifyDataSetChanged();
+//                return false;
+//            }
+//
+//
+//        });
+
+        editsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.i("well", " this worked");
+                return false;
+            }
+        });
         return theView;
     }
 
 
-
-
-
-    private void retrieveContacts(){
+    private Cursor retrieveContacts(){
         String projection [] = new String[]
                 {
                         ContactsContract.CommonDataKinds.Phone._ID,
@@ -68,16 +96,27 @@ public class ListFragment extends Fragment {
                         null,
                         null);
 
+        return profileCursor;
+    }
+
+
+    private void setAdapter(Cursor profileCursor){
+
         if(profileCursor != null){
             Log.i("Done", "Rows: " + profileCursor.getCount());
 
-            int eamilSent = -1;
+            int emailSent = -1;
             Bundle extras =  this.getArguments();
             if(extras != null) {
-                eamilSent = extras.getInt("emailSent");
+                emailSent = extras.getInt("emailSent");
             }
 
-            contacts_listview.setAdapter(new ContactsCursorAdapter(instance,profileCursor,eamilSent));
+
+            adapter = new ContactsCursorAdapter(instance,profileCursor,emailSent);
+            contacts_listview.setAdapter(adapter);
+
+
+
             contacts_listview.setClickable(true);
             contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -97,10 +136,7 @@ public class ListFragment extends Fragment {
                     MainActivity.getInstance().displayDetailsFragment(name, phone, email, itemPosition);
                 }
             });
-
-
         }
-
 
     }
 
