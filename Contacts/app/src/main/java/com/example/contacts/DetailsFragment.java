@@ -47,11 +47,12 @@ public class DetailsFragment extends Fragment {
             email = (TextView)theView.findViewById(R.id.email);
             final String contactEmail= extras.getString("theEmail");
             email.setText(contactEmail);
+            final int itemIdex = extras.getInt("emailSent");
 
             sendButton = (Button)theView.findViewById(R.id.send_email);
             sendButton.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
-                    sedEmail(theView, contactEmail);
+                    sedEmail(theView, contactEmail, itemIdex);
                 }
             });
 
@@ -63,7 +64,7 @@ public class DetailsFragment extends Fragment {
 
 
 
-    public void sedEmail(View theView, String email){
+    public void sedEmail(View theView, String email, int pos){
 
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -76,10 +77,10 @@ public class DetailsFragment extends Fragment {
         String emailBody = ((EditText)theView.findViewById(R.id.message)).getText().toString();
         i.putExtra(Intent.EXTRA_TEXT, emailBody);
 
-        Toast.makeText(MainActivity.getInstance(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-
         try {
             startActivity(Intent.createChooser(i, "Send mail..."));
+            MainActivity.getInstance().displayListFragment(pos);
+
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.getInstance(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
         }

@@ -4,4 +4,7 @@
     <string name="textview">TextView</string>
     <string name="name">Name</string>
     <string name="button">Button</string>
+    <string name="email_content">Email Content</string>
+    <string name="send_email">Send Email</string>
+    <string name="email_title">Email Title</string>
 </resources>

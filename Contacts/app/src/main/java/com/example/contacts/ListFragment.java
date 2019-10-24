@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -70,8 +71,13 @@ public class ListFragment extends Fragment {
         if(profileCursor != null){
             Log.i("Done", "Rows: " + profileCursor.getCount());
 
+            int eamilSent = -1;
+            Bundle extras =  this.getArguments();
+            if(extras != null) {
+                eamilSent = extras.getInt("emailSent");
+            }
 
-            contacts_listview.setAdapter(new ContactsCursorAdapter(instance,profileCursor));
+            contacts_listview.setAdapter(new ContactsCursorAdapter(instance,profileCursor,eamilSent));
             contacts_listview.setClickable(true);
             contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -84,9 +90,11 @@ public class ListFragment extends Fragment {
                     String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String email = MainActivity.getInstance().getEmail(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
+                    int itemPosition = cursor.getPosition();
+
                     Log.i("clickable", name + "/" + phone + "/" + email);
 
-                    MainActivity.getInstance().displayDetailsFragment(name, phone, email);
+                    MainActivity.getInstance().displayDetailsFragment(name, phone, email, itemPosition);
                 }
             });
 

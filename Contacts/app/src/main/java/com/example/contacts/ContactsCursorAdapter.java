@@ -3,6 +3,7 @@ package com.example.contacts;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import java.util.List;
 
 public class ContactsCursorAdapter extends CursorAdapter {
 
+    private int emailSent;
 
-    public ContactsCursorAdapter(Context context, Cursor cursor) {
+    public ContactsCursorAdapter(Context context, Cursor cursor, int emailSent) {
         super(context, cursor, 0);
+        this.emailSent = emailSent;
     }
 
     @Override
@@ -47,6 +50,14 @@ public class ContactsCursorAdapter extends CursorAdapter {
         final String theEmail = MainActivity.getInstance().getEmail(contactId);
         email = (TextView) view.findViewById(R.id.emailAddress);
         email.setText(theEmail);
+
+
+
+        if(emailSent !=-1 && emailSent == cursor.getPosition()){
+            TextView sent;
+            sent = (TextView) view.findViewById(R.id.emailSent);
+            sent.setText("E-mail was composed!");
+        }
     }
 
 

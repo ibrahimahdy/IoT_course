@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,requiredPermissions,  1);
         }
         else{
-            displayListFragment();
+            displayListFragment(-1);
         }
 
     }
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    displayListFragment();
+                    displayListFragment(-1);
                 }
                 return;
             }
@@ -53,13 +53,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void displayListFragment() {
+    public void displayListFragment(int emailSent) {
         ListFragment listFragment = new ListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment, "listFragmentTag").commit();
+
+        Bundle arguments = new Bundle();
+        arguments.putInt("emailSent", emailSent);
+        listFragment.setArguments(arguments);
     }
 
 
-    public void displayDetailsFragment(String name, String phone, String email) {
+    public void displayDetailsFragment(String name, String phone, String email, int itemPosition) {
 
         DetailsFragment detailsFragment = new DetailsFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detailsFragment, "detailsFragmentTag").commit();
@@ -69,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         arguments.putString("theName", name);
         arguments.putString("thePhone", phone);
         arguments.putString("theEmail", email);
+        arguments.putInt("itemPosition", itemPosition);
         detailsFragment.setArguments(arguments);
     }
 
