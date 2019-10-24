@@ -5,16 +5,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             displayListFragment(-1);
         }
-
     }
 
 
