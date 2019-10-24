@@ -5,20 +5,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    HashMap<String, String> myContact;
-    ArrayList<HashMap<String,String>> contactsList = new ArrayList();
     ListView contacts_listview;
     private static MainActivity instance;
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -74,7 +73,30 @@ public class MainActivity extends AppCompatActivity {
 
             contacts_listview = (ListView)findViewById(R.id.contacts_listview);
             contacts_listview.setAdapter(new ContactsCursorAdapter(this,profileCursor));
+
+            contacts_listview.setClickable(true);
+            contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i("clickable", "I am clicked");
+
+                    Cursor cursor = ((CursorAdapter)contacts_listview.getAdapter()).getCursor();
+                    cursor.moveToPosition(position);
+
+                    String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                    String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                    String email = getEmail(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
+                    Log.i("clickable", name + "/" + phone + "/" + email);
+
+
+                    openDetailsActivity(name, phone, email);
+
+                }
+            });
+
+
         }
+
 
     }
 
@@ -93,5 +115,15 @@ public class MainActivity extends AppCompatActivity {
         return emailAddress;
     }
 
+
+    static final int GO_TO_DETAILS = 1;
+
+    public void openDetailsActivity(String name, String phone, String email){
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra("theName", name);
+        intent.putExtra("thePhone", phone);
+        intent.putExtra("theEmail", email);
+        startActivityForResult(intent, GO_TO_DETAILS);
+    }
 
 }

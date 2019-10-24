@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="contact_details">Contact Details:</string>
+    <string name="textview">TextView</string>
+    <string name="name">Name</string>
+    <string name="button">Button</string>
 </resources>
