@@ -2,9 +2,13 @@ package com.example.contacts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +17,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView name;
     TextView phone;
     TextView email;
-
+    Button sendButton;
 
 
     @Override
@@ -31,22 +35,39 @@ public class DetailsActivity extends AppCompatActivity {
             phone.setText(extras.getString("thePhone"));
 
             email = (TextView)findViewById(R.id.email);
-            email.setText(extras.getString("theEmail"));
+            final String contactEmail= extras.getString("theEmail");
+            email.setText(contactEmail);
+
+            sendButton = (Button) findViewById(R.id.send_email);
+            sendButton.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View v) {
+                    sedEmail(contactEmail);
+                }
+            });
 
         }
 
     }
 
 
-//    public final int RATING = 1;
-//
-//    public void saveRating(View v){
-//
-//        RatingBar mBar = (RatingBar) findViewById(R.id.myRating);
-//        Intent resultIntent = new Intent();
-//        resultIntent.putExtra("theRating", mBar.getRating());
-//        resultIntent.putExtra("theIndex", indexValue);
-//        setResult(RATING, resultIntent);
-//        finish();
-//    }
+
+    public void sedEmail(String email){
+
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+
+        i.putExtra(Intent.EXTRA_EMAIL,new String[]{email});
+
+        String emailTitle = ((EditText)findViewById(R.id.title)).getText().toString();
+        i.putExtra(Intent.EXTRA_SUBJECT, emailTitle);
+
+        String emailBody = ((EditText)findViewById(R.id.message)).getText().toString();
+        i.putExtra(Intent.EXTRA_TEXT, emailBody);
+        
+        try {
+            startActivity(Intent.createChooser(i, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+           Toast.makeText(this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
