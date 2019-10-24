@@ -16,18 +16,10 @@ import java.util.List;
 
 public class ContactsCursorAdapter extends CursorAdapter {
 
-//    List<HashMap<String,String>> objects;
-//
-//    public ContactsCursorAdapter(List<HashMap<String,String>> numbers) {
-//        objects = numbers;
-//    }
-
-
 
     public ContactsCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
     }
-
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {

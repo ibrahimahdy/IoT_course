@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView contacts_listview;
+
     private static MainActivity instance;
 
     @Override
@@ -33,10 +33,11 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,requiredPermissions,  1);
         }
         else{
-            retrieveContacts();
+            displayListFragment();
         }
 
     }
+
 
 
     @Override
@@ -44,66 +45,38 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case 1: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    retrieveContacts();
+                    displayListFragment();
                 }
                 return;
             }
         }
     }
 
-    private void retrieveContacts(){
-        String projection [] = new String[]
-                {
-                        ContactsContract.CommonDataKinds.Phone._ID,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
-                        ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                        ContactsContract.CommonDataKinds.Phone.NUMBER
-                };
 
-        Cursor profileCursor =
-                getContentResolver().query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                        projection ,
-                        null,
-                        null,
-                        null);
-
-        if(profileCursor != null){
-            Log.i("Done", "Rows: " + profileCursor.getCount());
-
-            contacts_listview = (ListView)findViewById(R.id.contacts_listview);
-            contacts_listview.setAdapter(new ContactsCursorAdapter(this,profileCursor));
-
-            contacts_listview.setClickable(true);
-            contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.i("clickable", "I am clicked");
-
-                    Cursor cursor = ((CursorAdapter)contacts_listview.getAdapter()).getCursor();
-                    cursor.moveToPosition(position);
-
-                    String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                    String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                    String email = getEmail(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
-                    Log.i("clickable", name + "/" + phone + "/" + email);
+    public void displayListFragment() {
+        ListFragment listFragment = new ListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment, "listFragmentTag").commit();
+    }
 
 
-                    openDetailsActivity(name, phone, email);
+    public void displayDetailsFragment(String name, String phone, String email) {
 
-                }
-            });
-
-
-        }
+        DetailsFragment detailsFragment = new DetailsFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detailsFragment, "detailsFragmentTag").commit();
 
 
+        Bundle arguments = new Bundle();
+        arguments.putString("theName", name);
+        arguments.putString("thePhone", phone);
+        arguments.putString("theEmail", email);
+        detailsFragment.setArguments(arguments);
     }
 
 
     public static MainActivity getInstance() {
         return instance;
     }
+
     public String getEmail(String contactID) {
         String emailAddress="";
         Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI,null,ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactID,null, null);
@@ -113,17 +86,6 @@ public class MainActivity extends AppCompatActivity {
         }
         emails.close();
         return emailAddress;
-    }
-
-
-    static final int GO_TO_DETAILS = 1;
-
-    public void openDetailsActivity(String name, String phone, String email){
-        Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("theName", name);
-        intent.putExtra("thePhone", phone);
-        intent.putExtra("theEmail", email);
-        startActivityForResult(intent, GO_TO_DETAILS);
     }
 
 }
