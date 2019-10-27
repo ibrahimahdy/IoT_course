@@ -1,7 +1,5 @@
 package com.example.contacts;
 
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 /**
@@ -92,7 +91,19 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            MainActivity.getInstance().displayListFragment(pos);
+            FragmentManager fm = getFragmentManager();
+            if (fm.getBackStackEntryCount() > 0) {
+               Fragment listFragment =  fm.findFragmentByTag("listFragmentTag");
+                Bundle extras =  listFragment.getArguments();
+                if(extras != null) {
+                    extras.putInt("emailSent", pos);
+                    listFragment.setArguments(extras);
+                }
+                fm.popBackStack();
+            } else {
+                Log.i("MainActivity", "nothing on backstack, calling super");
+            }
         }
     }
+
 }

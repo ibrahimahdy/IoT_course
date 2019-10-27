@@ -45,23 +45,23 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
+    ListFragment listFragment;
 
     public void displayListFragment(int emailSent) {
-        ListFragment listFragment = new ListFragment();
+        listFragment = new ListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listFragment, "listFragmentTag").commit();
 
         Bundle arguments = new Bundle();
         arguments.putInt("emailSent", emailSent);
         listFragment.setArguments(arguments);
+
     }
 
 
     public void displayDetailsFragment(String name, String phone, String email, int itemPosition) {
 
         DetailsFragment detailsFragment = new DetailsFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detailsFragment, "detailsFragmentTag").commit();
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, detailsFragment, "detailsFragmentTag").addToBackStack(null).commit();
 
         Bundle arguments = new Bundle();
         arguments.putString("theName", name);

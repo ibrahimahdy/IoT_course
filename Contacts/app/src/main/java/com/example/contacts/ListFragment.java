@@ -14,13 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -40,20 +38,29 @@ public class ListFragment extends Fragment {
     LinearLayout theList;
     ListView contacts_listview;
     CursorAdapter adapter;
+    View theView;
+    Cursor profileCursor;
+    int emailSent;
+    String [] projection;
+
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View theView = inflater.inflate(R.layout.fragment_list, container, false);
-        theList = theView.findViewById(R.id.list_linearlayout);
-        contacts_listview = theView.findViewById(R.id.contacts_listview);
-
-
-        instance = MainActivity.getInstance();
-        retrieveContacts();
-
+        if (theView == null) {
+            theView = inflater.inflate(R.layout.fragment_list, container, false);
+            theList = theView.findViewById(R.id.list_linearlayout);
+            contacts_listview = theView.findViewById(R.id.contacts_listview);
+            instance = MainActivity.getInstance();
+            retrieveContacts();
+        } else {
+            setListAdapter();
+        }
         return theView;
     }
 
@@ -61,11 +68,22 @@ public class ListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+    }
+
+
+
+    @Override
+    public void onDestroyView() {
+        if (theView.getParent() != null) {
+            ((ViewGroup)theView.getParent()).removeView(theView);
+        }
+        super.onDestroyView();
     }
 
 
     private void retrieveContacts(){
-        final String projection [] = new String[]
+        projection = new String[]
                 {
                         ContactsContract.CommonDataKinds.Phone._ID,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -73,7 +91,7 @@ public class ListFragment extends Fragment {
                         ContactsContract.CommonDataKinds.Phone.NUMBER
                 };
 
-        Cursor profileCursor =
+         profileCursor =
                 instance.getContentResolver().query(
                         ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                         projection ,
@@ -84,33 +102,7 @@ public class ListFragment extends Fragment {
         if(profileCursor != null){
             Log.i("Done", "Rows: " + profileCursor.getCount());
 
-            int emailSent = -1;
-            Bundle extras =  this.getArguments();
-            if(extras != null) {
-                emailSent = extras.getInt("emailSent");
-            }
-
-
-            adapter = new ContactsCursorAdapter(instance,profileCursor,emailSent);
-            contacts_listview.setAdapter(adapter);
-
-            adapter.setFilterQueryProvider(new FilterQueryProvider() {
-
-                public Cursor runQuery(CharSequence constraint) {
-                    Log.d("theFilter", "runQuery constraint:"+constraint);
-
-                    Cursor filteredCursor =
-                            instance.getContentResolver().query(
-                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                                    projection,
-                                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME +  " Like '%" + constraint + "%'",
-                                    null,
-                                    null);
-                    return filteredCursor; //now your adapter will have the new filtered content
-                }
-
-            });
-
+            setListAdapter();
             contacts_listview.setClickable(true);
             contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -134,9 +126,37 @@ public class ListFragment extends Fragment {
     }
 
 
+    private void setListAdapter(){
 
-    private SearchView searchView = null;
-    private SearchView.OnQueryTextListener queryTextListener;
+        emailSent = -1;
+        Bundle extras =  this.getArguments();
+        if(extras != null) {
+            emailSent = extras.getInt("emailSent");
+        }
+        Log.i("emailSentssss", ""+emailSent);
+
+        adapter = new ContactsCursorAdapter(instance,profileCursor,emailSent);
+        contacts_listview.setAdapter(adapter);
+        adapter.setFilterQueryProvider(new FilterQueryProvider() {
+
+            public Cursor runQuery(CharSequence constraint) {
+                Log.d("theFilter", "runQuery constraint:"+constraint);
+                Cursor filteredCursor =
+                        instance.getContentResolver().query(
+                                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                projection,
+                                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME +  " Like '%" + constraint + "%'",
+                                null,
+                                null);
+
+                profileCursor = filteredCursor;
+                return filteredCursor; //now your adapter will have the new filtered content
+            }
+
+        });
+
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -184,6 +204,4 @@ public class ListFragment extends Fragment {
         searchView.setOnQueryTextListener(queryTextListener);
         return super.onOptionsItemSelected(item);
     }
-
-
 }
