@@ -51,11 +51,11 @@ public class ContactsCursorAdapter extends CursorAdapter {
         email = (TextView) view.findViewById(R.id.emailAddress);
         email.setText(theEmail);
 
-
+        TextView sent;
+        sent = (TextView) view.findViewById(R.id.emailSent);
+        sent.setText("");
 
         if(emailSent !=-1 && emailSent == cursor.getPosition()){
-            TextView sent;
-            sent = (TextView) view.findViewById(R.id.emailSent);
             sent.setText("E-mail was composed!");
         }
     }

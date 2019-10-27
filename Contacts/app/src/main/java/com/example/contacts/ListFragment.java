@@ -123,11 +123,10 @@ public class ListFragment extends Fragment {
                     String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                     String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
                     String email = MainActivity.getInstance().getEmail(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID)));
-                    int itemPosition = cursor.getPosition();
 
-                    Log.i("clickable", name + "/" + phone + "/" + email);
+                    Log.i("clickable", name + "/" + phone + "/" + email + "/" + position);
 
-                    MainActivity.getInstance().displayDetailsFragment(name, phone, email, itemPosition);
+                    MainActivity.getInstance().displayDetailsFragment(name, phone, email, position);
                 }
             });
         }

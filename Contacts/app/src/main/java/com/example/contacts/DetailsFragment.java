@@ -1,8 +1,10 @@
 package com.example.contacts;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ public class DetailsFragment extends Fragment {
     Button sendButton;
 
 
+    private int pos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,12 +50,12 @@ public class DetailsFragment extends Fragment {
             email = (TextView)theView.findViewById(R.id.email);
             final String contactEmail= extras.getString("theEmail");
             email.setText(contactEmail);
-            final int itemIdex = extras.getInt("emailSent");
+            pos = extras.getInt("itemPosition");
 
             sendButton = (Button)theView.findViewById(R.id.send_email);
             sendButton.setOnClickListener(new Button.OnClickListener() {
                 public void onClick(View v) {
-                    sedEmail(theView, contactEmail, itemIdex);
+                    sedEmail(theView, contactEmail);
                 }
             });
 
@@ -64,7 +67,7 @@ public class DetailsFragment extends Fragment {
 
 
 
-    public void sedEmail(View theView, String email, int pos){
+    public void sedEmail(View theView, String email){
 
         Intent i = new Intent(Intent.ACTION_SEND);
         i.setType("message/rfc822");
@@ -78,11 +81,18 @@ public class DetailsFragment extends Fragment {
         i.putExtra(Intent.EXTRA_TEXT, emailBody);
 
         try {
-            startActivity(Intent.createChooser(i, "Send mail..."));
-            MainActivity.getInstance().displayListFragment(pos);
+            startActivityForResult(i, 1);
 
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(MainActivity.getInstance(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            MainActivity.getInstance().displayListFragment(pos);
         }
     }
 }
