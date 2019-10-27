@@ -7,4 +7,6 @@
     <string name="email_content">Email Content</string>
     <string name="send_email">Send Email</string>
     <string name="email_title">Email Title</string>
+
+    <string name="search_title">Search</string>
 </resources>

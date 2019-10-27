@@ -1,17 +1,22 @@
 package com.example.contacts;
 
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.FilterQueryProvider;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -34,7 +39,6 @@ public class ListFragment extends Fragment {
 
     LinearLayout theList;
     ListView contacts_listview;
-    SearchView editsearch;
     CursorAdapter adapter;
 
 
@@ -48,39 +52,20 @@ public class ListFragment extends Fragment {
 
 
         instance = MainActivity.getInstance();
-        setAdapter(retrieveContacts());
+        retrieveContacts();
 
-
-        editsearch = (SearchView) theView.findViewById(R.id.search);
-//        editsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-////                adapter.getFilter().filter(query);
-////                adapter.notifyDataSetChanged();
-//                return false;
-//            }
-//
-//
-//        });
-
-        editsearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.i("well", " this worked");
-                return false;
-            }
-        });
         return theView;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
-    private Cursor retrieveContacts(){
-        String projection [] = new String[]
+
+    private void retrieveContacts(){
+        final String projection [] = new String[]
                 {
                         ContactsContract.CommonDataKinds.Phone._ID,
                         ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -96,12 +81,6 @@ public class ListFragment extends Fragment {
                         null,
                         null);
 
-        return profileCursor;
-    }
-
-
-    private void setAdapter(Cursor profileCursor){
-
         if(profileCursor != null){
             Log.i("Done", "Rows: " + profileCursor.getCount());
 
@@ -115,7 +94,22 @@ public class ListFragment extends Fragment {
             adapter = new ContactsCursorAdapter(instance,profileCursor,emailSent);
             contacts_listview.setAdapter(adapter);
 
+            adapter.setFilterQueryProvider(new FilterQueryProvider() {
 
+                public Cursor runQuery(CharSequence constraint) {
+                    Log.d("theFilter", "runQuery constraint:"+constraint);
+
+                    Cursor filteredCursor =
+                            instance.getContentResolver().query(
+                                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                                    projection,
+                                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME +  " Like '%" + constraint + "%'",
+                                    null,
+                                    null);
+                    return filteredCursor; //now your adapter will have the new filtered content
+                }
+
+            });
 
             contacts_listview.setClickable(true);
             contacts_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,6 +135,56 @@ public class ListFragment extends Fragment {
     }
 
 
+
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        inflater.inflate(R.menu.options_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+
+            queryTextListener = new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    Log.i("onQueryTextChange", newText);
+                    adapter.getFilter().filter(newText);
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Log.i("onQueryTextSubmit", query);
+                    adapter.getFilter().filter(query);
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+            };
+            searchView.setOnQueryTextListener(queryTextListener);
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                // Not implemented here
+                return false;
+            default:
+                break;
+        }
+        searchView.setOnQueryTextListener(queryTextListener);
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }
