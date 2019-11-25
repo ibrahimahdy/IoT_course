@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">multiplayer-pong</string>
+    <string name="mode_win">Win</string>
+    <string name="mode_lose">Lose</string>
+    <string name="mode_pause" />
+    <string name="ready">Ready</string>
+    <string name="default_score">0</string>
+</resources>
