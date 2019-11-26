@@ -1,17 +1,15 @@
 package com.example.assignment2;
 
-import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.RectF;
 
 
 public class Ball{
-    public int[] direction = new int[]{1,1}; //direction modifier (-1,1)
-    public int x,y,size;
-    public int speed = 10;
-    public Paint paint;
-    public RectF oval;
+    private int[] direction = new int[]{1,1};
+    private int x,y,size;
+    private int speed = 8;
+    private Paint paint;
+    private RectF oval;
 
     public Ball(int x, int y, int size, int color){
         this.x = x;
@@ -21,23 +19,63 @@ public class Ball{
         this.paint.setColor(color);
     }
 
-    public void move(Canvas canvas) {
-        this.x += speed*direction[0];
-        this.y += speed*direction[1];
-        this.oval = new RectF(x-size/2,y-size/2,x+size/2,y+size/2);
 
-        //Do we need to bounce next time?
-        Rect bounds = new Rect();
-        this.oval.roundOut(bounds); ///store our int bounds
-
-        //This is what you're looking for ▼
-        if(!canvas.getClipBounds().contains(bounds)){
-            if(this.x-size<0 || this.x+size > canvas.getWidth()){
-                direction[0] = direction[0]*-1;
-            }
-            if(this.y-size<0 || this.y+size > canvas.getHeight()){
-                direction[1] = direction[1]*-1;
-            }
-        }
+    public int getSize() {
+        return size;
     }
+
+    public int[] getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int[] direction) {
+        this.direction = direction;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public Paint getPaint() {
+        return paint;
+    }
+
+    public void setPaint(Paint paint) {
+        this.paint = paint;
+    }
+
+    public RectF getOval() {
+        return oval;
+    }
+
+    public void setOval(RectF oval) {
+        this.oval = oval;
+    }
+
+
+
 }

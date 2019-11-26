@@ -21,26 +21,26 @@ public class PingView extends View {
 
 
     private AttributeSet attrs;
+
     private Paint p1_paint;
     private Paint p2_paint;
-    private Paint ball;
 
     private Player player1;
     private Player player2;
+
     private int recW;
     private int recH;
+    private int w;
+    private int h;
 
     private Ball theBall;
-    private int ballSize;
 
     Context myContext;
-
     public PingView(Context context) {
         super(context);
         myContext = context;
         init();
     }
-
 
     private void init() {
 
@@ -49,7 +49,6 @@ public class PingView extends View {
         try {
             recW = a.getInteger(R.styleable.PingView_recWidth, 200);
             recH = a.getInteger(R.styleable.PingView_recHeight, 35);
-            ballSize = a.getInteger(R.styleable.PingView_ballRadius, 20);
         } finally {
             a.recycle();
         }
@@ -64,12 +63,10 @@ public class PingView extends View {
         p2_paint.setAntiAlias(true);
         p2_paint.setStrokeWidth(80f);
 
-        theBall = new Ball(50,50,100,Color.BLACK);
-
+        theBall = new Ball(50,50,60,Color.BLACK);
     }
 
-    int w;
-    int h;
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -88,15 +85,14 @@ public class PingView extends View {
     }
 
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawRect(player1.getRec(), player1.getPaint());
         canvas.drawRect(player2.getRec(), player2.getPaint());
-        theBall.move(canvas);
-        canvas.drawOval(theBall.oval,theBall.paint);
+        moveBall(canvas, player1.getRec());
+        canvas.drawOval(theBall.getOval(),theBall.getPaint());
 
         invalidate();
     }
@@ -110,10 +106,40 @@ public class PingView extends View {
         }
 
         player1.getRec().offsetTo(newLeft, player1.getRec().top);
-
     }
 
+    public void moveBall(Canvas canvas, RectF player1) {
+        int x= theBall.getX();
+        int y = theBall.getY();
+        int speed = theBall.getSpeed();
+        int[] direction = theBall.getDirection();
+
+        int size = theBall.getSize();
+
+        x += speed*direction[0];
+        theBall.setX(x);
+        y += speed*direction[1];
+        theBall.setY(y);
+        theBall.setOval(new RectF(x-size/2,y-size/2,x+size/2,y+size/2));
+
+        Rect bounds = new Rect();
+        theBall.getOval().roundOut(bounds);
+
+        if(!canvas.getClipBounds().contains(bounds)){
+            if(x-size<0 || x+size > canvas.getWidth()){
+                direction[0] = direction[0]*-1;
+            }
+            if(y-size<0 || y+size > canvas.getHeight()){
+                direction[1] = direction[1]*-1;
+            }
+
+            theBall.setDirection(direction);
 
 
+            if(theBall.getOval().intersect(player1)){
+                Log.i("collid", "BANG");
+            }
+        }
+    }
 
 }
