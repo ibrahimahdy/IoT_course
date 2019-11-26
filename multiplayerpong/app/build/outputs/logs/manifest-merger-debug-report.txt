@@ -1,0 +1,138 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\564df731b2ae558b08d65cce7d62e775\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core-ktx:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\22a90d326a94ebd1924271ed560c4537\core-ktx-1.1.0\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\ff552c02e5b72cb99043c80670d4c646\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\1867244fe5c0b5c70fab05e6e6ca4aeb\appcompat-resources-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\00fcadeab7ae2ca97121eb7532884cbe\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9a24d1bae82454fd6d3a20b230235976\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\3102a5220f5ac000cf6d178a5a77b30e\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\cc1fc6a06964c4bd465aae7b9e045f93\activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\795f46d1360f277ef7772c8338c94218\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\eda785c5d40ed6c8fa819bdf515f43b6\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e10b33ac1f43d3a5d81ff47cf382b819\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\af2b37a3da54019c9b239c28dc4e100b\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9d0737a57214a84d521b870ac9265143\versionedparcelable-1.1.0\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\6e9d61a36035e536050eb7034d200015\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\c9721e94abe734b4e7424aa55d6f8765\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\b04f36ca571b36dee2139ebd80a05d06\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\343c1a935804b853ff1aa264dec026f0\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\225754528b79bebaee36b0d574216c3a\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e847c24c54799ee5a861623967b3e10f\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\82f126412de2a0df4124ee518a10f4c2\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+	package
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:2:5-41
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:1-23:12
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:1:11-69
+application
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:4:5-22:19
+MERGED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9d0737a57214a84d521b870ac9265143\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9d0737a57214a84d521b870ac9265143\versionedparcelable-1.1.0\AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:7:9-41
+	android:roundIcon
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:8:9-54
+	android:icon
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:10:9-40
+activity#com.saeed.multiplayer_pong.ui.GameActivity
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:12:9-20:20
+	android:screenOrientation
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:15:13-50
+	android:configChanges
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:14:13-63
+	android:name
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:13:13-44
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:16:13-19:29
+action#android.intent.action.MAIN
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:17:17-69
+	android:name
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:17:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\564df731b2ae558b08d65cce7d62e775\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\564df731b2ae558b08d65cce7d62e775\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-ktx:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\22a90d326a94ebd1924271ed560c4537\core-ktx-1.1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.core:core-ktx:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\22a90d326a94ebd1924271ed560c4537\core-ktx-1.1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\ff552c02e5b72cb99043c80670d4c646\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\ff552c02e5b72cb99043c80670d4c646\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\1867244fe5c0b5c70fab05e6e6ca4aeb\appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\1867244fe5c0b5c70fab05e6e6ca4aeb\appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\00fcadeab7ae2ca97121eb7532884cbe\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\00fcadeab7ae2ca97121eb7532884cbe\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9a24d1bae82454fd6d3a20b230235976\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9a24d1bae82454fd6d3a20b230235976\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\3102a5220f5ac000cf6d178a5a77b30e\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\3102a5220f5ac000cf6d178a5a77b30e\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\cc1fc6a06964c4bd465aae7b9e045f93\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\cc1fc6a06964c4bd465aae7b9e045f93\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\795f46d1360f277ef7772c8338c94218\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\795f46d1360f277ef7772c8338c94218\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\eda785c5d40ed6c8fa819bdf515f43b6\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\eda785c5d40ed6c8fa819bdf515f43b6\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e10b33ac1f43d3a5d81ff47cf382b819\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e10b33ac1f43d3a5d81ff47cf382b819\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\4ec7dcff28357ebf46b568becc0e8573\core-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\af2b37a3da54019c9b239c28dc4e100b\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\af2b37a3da54019c9b239c28dc4e100b\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9d0737a57214a84d521b870ac9265143\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\9d0737a57214a84d521b870ac9265143\versionedparcelable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\6e9d61a36035e536050eb7034d200015\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\6e9d61a36035e536050eb7034d200015\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\c9721e94abe734b4e7424aa55d6f8765\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\c9721e94abe734b4e7424aa55d6f8765\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\b04f36ca571b36dee2139ebd80a05d06\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\b04f36ca571b36dee2139ebd80a05d06\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\343c1a935804b853ff1aa264dec026f0\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\343c1a935804b853ff1aa264dec026f0\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\225754528b79bebaee36b0d574216c3a\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\225754528b79bebaee36b0d574216c3a\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e847c24c54799ee5a861623967b3e10f\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\e847c24c54799ee5a861623967b3e10f\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\82f126412de2a0df4124ee518a10f4c2\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Ibrahim\.gradle\caches\transforms-2\files-2.1\82f126412de2a0df4124ee518a10f4c2\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		ADDED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
+		INJECTED from D:\UT\IoT\Code\multiplayerpong\app\src\main\AndroidManifest.xml
