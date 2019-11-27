@@ -70,7 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("MqttActivity","MQTT Message:" + topic +", msg:" +  new String(mqttMessage.getPayload()));
+                String message = new String(mqttMessage.getPayload());
+                Log.w("MqttActivity","MQTT Message:" + topic +", msg:" + message );
+
+                if(message.equals("left")){
+                    pingView.movePaddle(100, pingView.getPlayer2());
+                }else if(message.equals("right")){
+                    pingView.movePaddle(-100, pingView.getPlayer2());
+                }
             }
 
             @Override

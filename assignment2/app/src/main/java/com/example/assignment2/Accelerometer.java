@@ -36,7 +36,7 @@ public class Accelerometer implements SensorEventListener {
         deltaY = Math.abs(deltaY - event.values[1]);
         if (deltaY > 5){
             Log.i("deltaY", ""+event.values[1]*290);
-            pingView.movePaddle(event.values[1]*290);
+            pingView.movePaddle(event.values[1]*290, pingView.getPlayer1());
         }
     }
 

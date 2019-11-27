@@ -112,15 +112,25 @@ public class PingView extends View {
         invalidate();
     }
 
-    public void movePaddle(float moveValue){
-        float newLeft = player1.getRec().left + moveValue;
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void movePaddle(float moveValue, Player p){
+
+        float newLeft = p.getRec().left + moveValue;
         if(newLeft <= 0) {
             newLeft = 0;
         }else if(newLeft >= w){
             newLeft = (w-recW -4);
         }
 
-        player1.getRec().offsetTo(newLeft, player1.getRec().top);
+        p.getRec().offsetTo(newLeft, p.getRec().top);
     }
 
 
