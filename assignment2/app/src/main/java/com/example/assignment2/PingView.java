@@ -8,13 +8,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-
 
 
 public class PingView extends View {
@@ -34,6 +31,14 @@ public class PingView extends View {
     private int h;
 
     private Ball theBall;
+
+    private Canvas myCanvas;
+    private enum Status {
+        NEW,
+        RUNNING
+    }
+
+    Status gameStatus;
 
     Context myContext;
     public PingView(Context context) {
@@ -64,6 +69,8 @@ public class PingView extends View {
         p2_paint.setStrokeWidth(80f);
 
         theBall = new Ball(50,50,60,Color.BLACK);
+
+        gameStatus = Status.NEW;
     }
 
 
@@ -75,23 +82,31 @@ public class PingView extends View {
         w = resolveSizeAndState(minw, widthMeasureSpec, 1);
         h = resolveSizeAndState(MeasureSpec.getSize(w) , heightMeasureSpec, 0);
         setMeasuredDimension(w, h);
+        int middle = (w/2) - (recW/2);
 
-        RectF rec1 = new RectF(0, 0,recW,recH);
+        RectF rec1 = new RectF(middle, 0,(middle+recW),recH);
         player1 = new Player(rec1,p1_paint);
 
-        RectF rec2 = new RectF(0, h , recW, (h-recH));
+        RectF rec2 = new RectF(middle, h , (middle+recW), (h-recH));
         player2 = new Player(rec2,p2_paint);
 
     }
 
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        myCanvas = canvas;
 
         canvas.drawRect(player1.getRec(), player1.getPaint());
         canvas.drawRect(player2.getRec(), player2.getPaint());
-        moveBall(canvas, player1.getRec());
+
+        if(gameStatus == Status.NEW){
+            theBall.setOval(new RectF(w/2,h/2,w/2+theBall.getSize(),h/2+theBall.getSize()));
+        }else{
+            moveBall(canvas,player1.getRec());
+        }
         canvas.drawOval(theBall.getOval(),theBall.getPaint());
 
         invalidate();
@@ -108,18 +123,22 @@ public class PingView extends View {
         player1.getRec().offsetTo(newLeft, player1.getRec().top);
     }
 
+
     public void moveBall(Canvas canvas, RectF player1) {
+
+        gameStatus = Status.RUNNING;
+
         int x= theBall.getX();
         int y = theBall.getY();
         int speed = theBall.getSpeed();
         int[] direction = theBall.getDirection();
-
         int size = theBall.getSize();
 
         x += speed*direction[0];
         theBall.setX(x);
         y += speed*direction[1];
         theBall.setY(y);
+
         theBall.setOval(new RectF(x-size/2,y-size/2,x+size/2,y+size/2));
 
         Rect bounds = new Rect();
@@ -130,16 +149,26 @@ public class PingView extends View {
                 direction[0] = direction[0]*-1;
             }
             if(y-size<0 || y+size > canvas.getHeight()){
+                if(theBall.getOval().intersect(player1)){
+                    Log.i("collid", "BANG");
+                }else{
+                    Log.i("collid", "LOSE");
+                }
                 direction[1] = direction[1]*-1;
             }
 
             theBall.setDirection(direction);
 
-
-            if(theBall.getOval().intersect(player1)){
-                Log.i("collid", "BANG");
-            }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        if(myCanvas !=null){
+            moveBall(myCanvas, player1.getRec());
+            Log.i("CANN", "heyy");
+        }
+        return true;
     }
 
 }

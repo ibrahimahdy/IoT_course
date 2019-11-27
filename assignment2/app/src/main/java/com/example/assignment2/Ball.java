@@ -5,9 +5,9 @@ import android.graphics.RectF;
 
 
 public class Ball{
-    private int[] direction = new int[]{1,1};
+    private int[] direction = new int[]{-1,-1};
     private int x,y,size;
-    private int speed = 8;
+    private int speed = 4;
     private Paint paint;
     private RectF oval;
 
